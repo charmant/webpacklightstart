@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const SvgStore = require('webpack-svgstore-plugin')
 
 // Main const
 // see more: https://github.com/vedees/webpack-template/blob/master/README.md#main-const
@@ -120,7 +121,20 @@ module.exports = {
       { from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts` },
       { from: `${PATHS.src}/static`, to: '' },
     ]),
-
+    new SvgStore({
+      // svgo options\
+      svgoOptions: {
+        plugins: [
+          { removeTitle: true },
+          // { removeViewBox: true },
+          // { removeAttrs: {
+          //     attrs: '*:(stroke|fill):((?!^none$).)*'
+          //   }
+          // }
+        ]
+      },
+      prefix: ''
+    }),
     // Automatic creation any html pages (Don't forget to RERUN dev server)
     // see more: https://github.com/vedees/webpack-template/blob/master/README.md#create-another-html-files
     // best way to create pages: https://github.com/vedees/webpack-template/blob/master/README.md#third-method-best

@@ -7,6 +7,10 @@ import './assets/scss/main.scss'
 // CSS (example)
 // import './assets/css/main.css'
 
+//SvgStore
+var __svg__  = { path: './assets/img/**/icon-*.svg', name: 'assets/img/[hash].logos.svg' };
+require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__);
+
 // Vue.js
 window.Vue = require('vue')
 

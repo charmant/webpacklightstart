@@ -4,6 +4,9 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
   // BUILD config
+  output: {
+    publicPath: './'
+  },
   mode: 'production',
   plugins: [
     new ImageminPlugin({

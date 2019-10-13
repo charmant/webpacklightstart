@@ -1,0 +1,58 @@
+.popup-menu {
+  padding-top: 8rem;
+  text-align: center;
+  background-color: #fff;
+  transition: var(--g-anime);
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .btn--ticket {
+    margin: 0 auto;
+    flex-grow: 1;
+  }
+  
+  .contacts {
+    text-align: left;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    padding-bottom: 3rem;
+
+    & > .contacts__list {
+      margin-bottom: 2rem;
+    }
+
+    .hr {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      height: 1px;
+      background-color: $accentColor;
+    }
+
+    &__wrap {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .btn--ticket {
+
+    font-size: 1.6rem;
+
+    hr {
+
+      @media only screen and (max-width: $breakpoint-small) {
+        height: 4rem;
+      }
+    }
+
+    .icon {
+      @media only screen and (max-width: $breakpoint-small) {
+        width: 4rem;
+      }
+    }
+  }
+}

@@ -2,39 +2,79 @@
 @import "utils/vars";
 @import "utils/mixins";
 @import "utils/fonts";
-@import "utils/reset";
+@import "utils/uk-custom";
 
+//--------------------------------
+// Global style
+//--------------------------------
 html {
-  line-height: $mainLineHeight;
-	font-size: $mainFontSize;
-	color: $mainFontColor;
-  height: 100%;
-  @media screen and (max-width: $desktopWidth) {
-		font-size: 16px;
+  font-size: 10px;
+  color: $mainFontColor;
+
+  @media screen and (max-width: $breakpoint-xlarge) and (min-width: $breakpoint-medium + 1) {
+    font-size: calc(6.5px + (12.5 - 6.5)*((100vw - 768px)/(1920 - 768)));
   }
-  @media screen and (max-width: $tableWidth) {
-		font-size: 15px;
+  @media screen and (max-width: $breakpoint-medium) and (min-width: $breakpoint-small + 1) {
+    font-size: calc(11px + 2 * ((100vw - 768px)/(1024 - 768)));
   }
-  @media screen and (max-width: $phoneWidth) {
-		font-size: 14px;
+  @media screen and (max-width: $breakpoint-small) {
+    font-size: calc(10px + 2 * ((100vw - 320px)/(767 - 320)));
   }
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: $mainFont;
-	font-size: $mainFontSize;
-  font-weight: $mainFontWeight;
+  position: relative;
+  max-width: $breakpoint-xlarge;
+  min-width: 320px;
+  margin: 0 auto;
+  font-family: var(--mainFont);
+  font-size: var(--mainFontSize);
+  line-height: var(--mainLineHeight);
+  font-weight: var(--mainFontWeight);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: $mainFontColor;
+  background-color: $neutral-primary;
 }
 
-*, *:before, *:after { box-sizing: border-box; }
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
-h1, h2, h3, h4, h5, h6 { margin: 0; }
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: $mainFontColor;
+}
 
-a { text-decoration: none; }
+a {
+  text-decoration: none;
+  color: inherit;
+
+  transition: var(--g-anime);
+
+  &:focus {
+    outline: none;
+
+  }
+
+  &:hover {
+    color: inherit;
+  }
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+  }
+}
+
+button {
+  cursor: pointer;
+  transition: var(--g-anime);
+
+  &:focus {
+    outline: none;
+  }
+}
 
 ul, li {
   margin: 0;
@@ -42,49 +82,80 @@ ul, li {
   list-style-type: none;
 }
 
-section, .section {
-  position: relative;
-  padding: 40px 0;
-  @media screen and (max-width: $desktopWidth) {
-    padding: 36px 0;
-  }
-  @media screen and (max-width: $desktopWidth) {
-    padding: 28px 0;
-  }
-  @media screen and (max-width: $desktopWidth) {
-    padding: 20px 0;
+b, strong {
+  font-weight: 700;
+}
+
+p {
+  margin-top: 0;
+}
+
+input, textarea {
+  width: 100%;
+  color: $mainFontColor;
+  &:focus {
+    outline: none;
   }
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  min-height: 100vh;
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
+
+/*--------------------------------
+        Global classes
+--------------------------------*/
 
 .container {
-  width: 100%;
-  flex: 0 0 auto;
-  position: relative;
-  margin: 0 auto;
-  max-width: $desktopWidth;
-  @media screen and (max-width: $smDesktopWidth) {
-    max-width: tableWidth;
-  }
-  @media screen and (max-width: $tableWidth) {
-    max-width: phoneWidth;
-  }
-  @media screen and (max-width: $phoneWidth) {
-    max-width: smPhoneWidth;
+  margin-left: 16.5rem;
+  margin-right: 16.5rem;
+  @media (max-width: $breakpoint-medium) {
+    margin-left: 1.6rem;
+    margin-right: 1.6rem;
   }
 }
 
-// Modules
-// @import "modules/my-module.scss";
+.text-content {
+  ul, li {
+    list-style-type: disc;
+  }
+
+  li:nth-child(n+2) {
+    margin-top: 1rem;
+  }
+
+
+  @media (max-width: $breakpoint-medium) {
+
+    .uk-grid ul {
+      margin-left: 20px;
+    }
+
+    &.bg-color {
+      padding-top: 5rem;
+      padding-bottom: 5.5rem;
+    }
+  }
+}
+
+@import "utils/classes";

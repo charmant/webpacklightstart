@@ -1,0 +1,92 @@
+.social {
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item.is-share {
+    .icon {
+      fill: $accentColor;
+    }
+
+    &:hover .icon {
+      fill: $accentColorHover;
+    }
+
+    &:active .icon {
+      fill: $accentColorActive;
+    }
+  }
+
+   a {
+     display: block;
+   }
+
+  &--large {
+
+    .social__list {
+      margin-left: -1rem;
+    }
+
+    .social__item {
+      padding-left: 1rem;
+    }
+
+    .icon {
+      display: block;
+      width: 4.8rem;
+      height: 4.8rem;
+      
+      @media (max-width: $breakpoint-medium) {
+        width: 4.2rem;
+        height: 4.2rem;
+      }
+    }
+  }
+
+  &--small {
+
+    .social__list {
+      margin-left: -.8rem;
+    }
+
+    .social__item {
+      padding-left: .8rem;
+    }
+
+    .icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  
+  svg {
+    fill: $mainFontColor;
+    transition: var(--g-anime);
+  }
+
+  a:hover {
+    svg {
+      fill: $accentColorHover;
+    }
+  }
+
+  a:active {
+    svg {
+      fill: $accentColorActive;
+    }
+  }
+
+  &--light {
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  &--dark {
+    svg {
+      fill: $mainFontColor;
+    }
+  }
+}

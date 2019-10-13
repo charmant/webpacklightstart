@@ -1,35 +1,81 @@
-// Font
-$mainFont                : 'Montserrat', Helvetica, Arial, sans-serif;
+//--------------------------------
+// Import Fonts
+//--------------------------------
+//@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700&display=swap&subset=cyrillic');
 
-// Size
-$mainFontColor           : #101010;
-$mainFontSize            : 18px;
-$mainFontWeight          : 400;
-$mainLineHeight          : 1.4;
+//--------------------------------
+// Global breakpoints
+//--------------------------------
+$breakpoint-small:                              767px !default;  // Phone landscape
+$breakpoint-medium:                             1023px !default;  // Tablet Landscape
+$breakpoint-large:                              1300px !default; // Desktop
+$breakpoint-xlarge:                             1920px !default; // Large Screens
 
-$desktopWidth            : 1280px;
-$smDesktopWidth          : 980px;
-$tableWidth              : 768px;
-$phoneWidth              : 480px;
-$smPhoneWidth            : 320px;
+
+//--------------------------------
+// Global variables
+//--------------------------------
 
 // Main color
-$default-color           : #ffffff;
-$primary-color           : #444ce0;
-$success-color           : #26de81;
-$danger-color            : #fc5c65;
-$warning-color           : #fed330;
-$light-color             : #999999;
-$purple-color            : #8854d0;
+$mainFontColor           : #111;
+$mainFontColorExtra      : #4D4D4D;
+$accentColor             : #DB2D24;
+$accentColorHover        : #BE221A;
+$accentColorActive       : #981912;
+//$accentColorExtra        : #C91919;
+
+//$default-color           : #ffffff;
+//$primary-color           : #444ce0;
+//$success-color           : #26de81;
+//$danger-color            : #fc5c65;
+//$warning-color           : #fed330;
+//$light-color             : #999999;
+//$purple-color            : #8854d0;
 
 // Neutral Color
-$neutral-primary         : #303133;
-$neutral-regular         : #606266;
-$neutral-secondary       : #909399;
-$neutral-placeholder     : #C0C4CC;
+$neutral-primary         : #F4F4F4;
+$neutral-regular         : #E3E3E3;
+$neutral-secondary       : #C4C4C4;
+//$neutral-placeholder     : #C0C4CC;
 
 // Border Color
-$border-base             : #DCDFE6;
-$border-light            : #E4E7ED;
-$border-lighter          : #EBEEF5;
-$border-lightex          : #F2F6FC;
+//$border-base             : #DCDFE6;
+//$border-light            : #E4E7ED;
+//$border-lighter          : #EBEEF5;
+//$border-lightex          : #F2F6FC;
+
+
+:root {
+  // Font
+  --mainFont                :'PT Root UI', sans-serif;
+
+  // Size
+  --mainFontSize           : 2.2rem;
+  --mainFontWeight         : 400;
+  --mainLineHeight         : 1.6;
+
+  //global anime
+  --g-anime: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  //global shadow
+  --g-shadow: 0px 12px 24px rgba(0, 0, 0, 0.06);
+
+  @media (max-width: $breakpoint-medium) {
+    --mainFontSize        : 1.8rem;
+  }
+}
+
+
+// todo for RTL
+//$direction           :ltr;
+//$opposite-direction   :rtl;
+
+/*** LTR websites ***/
+//$start-direction     :left;
+//$end-direction       :right;
+//$transform-direction :1;
+
+/*** RTL websites ***/
+//$start-direction     :right;
+//$end-direction       :left;
+//$transform-direction :-1;

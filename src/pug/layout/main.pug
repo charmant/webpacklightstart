@@ -1,5 +1,9 @@
 include ../utils/mixins
+
 block variables
+  - var title = 'Title';
+  - var description = 'Description';
+  - var pageClass = '';
 
 doctype html
 html(lang='en')
@@ -10,11 +14,11 @@ html(lang='en')
     block head
 
   body(class=pageClass)
-    .wrapper
-      #app
-        include ../includes/modules/header
-        .content-wrapper
-          block content
-        include ../includes/modules/footer
+    //#app
+    include ../includes/modules/header
+
+    block content
+
+    include ../includes/modules/footer
 
     block script

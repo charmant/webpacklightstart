@@ -1,0 +1,26 @@
+.accent-color {
+  color: $accentColor;
+}
+
+.icon {
+  transition: var(--g-anime);
+}
+
+.extra-color {
+  color: $mainFontColorExtra;
+}
+
+.hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  height: .4rem;
+  min-height: .4rem;
+  width: 100%;
+  background-color: $neutral-regular;
+  border: none;
+}
+
+.title {
+
+}
+

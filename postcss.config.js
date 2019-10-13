@@ -1,14 +1,12 @@
-// autoprefixer - https://github.com/postcss/autoprefixer
-// css-mqpacker - https://github.com/hail2u/node-css-mqpacker
-// cssnano      - https://github.com/hail2u/node-css-mqpacker
-
-// npm install postcss-loader autoprefixer css-mqpacker cssnano --save-dev
+// postcss config file
 
 module.exports = {
   plugins: [
-    require('autoprefixer'),
-    require('css-mqpacker'),
-    require('cssnano')({
+    require('autoprefixer'), //sets autoprefix
+    require('css-mqpacker')({ //remove all extra media queries
+      sort: require('sort-css-media-queries').desktopFirst // sort media by desktop first
+    }),
+    require('cssnano')({ //minimize css
       preset: [
         'default', {
           discardComments: {
@@ -18,4 +16,4 @@ module.exports = {
       ]
     })
   ]
-}
+};

@@ -1,0 +1,16 @@
+{
+  "/build/app.css": "./css/app.css",
+  "/build/app.js": "./js/app.js",
+  "/build/vendors.js": "./js/vendors.js",
+  "/build/./index.html": "././index.html",
+  "/build/assets/fonts/main.scss": "./assets/fonts/TTSquares-Bold.woff",
+  "/build/favicon.ico": "./favicon.ico",
+  "/build/fonts/.gitkeep": "./fonts/.gitkeep",
+  "/build/fonts/Roboto-Bold.ttf": "./fonts/Roboto-Bold.ttf",
+  "/build/fonts/TTSquares-Bold.eot": "./fonts/TTSquares-Bold.eot",
+  "/build/fonts/TTSquares-Bold.ttf": "./fonts/TTSquares-Bold.ttf",
+  "/build/fonts/TTSquares-Bold.woff": "./fonts/TTSquares-Bold.woff",
+  "/build/img/logo.png": "./img/logo.png",
+  "/build/robots.txt": "./robots.txt",
+  "/build/sitemap.xml": "./sitemap.xml"
+}

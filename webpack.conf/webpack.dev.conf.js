@@ -6,12 +6,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {   // DEV config
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: baseWebpackConfig.externals.paths.dist,
+    // contentBase: [path.join(__dirname, '../resources/pug/'), path.join(__dirname, '../public/build')],
+    // watchContentBase: true,
     port: 8081,
+    hot: true,
+    inline: true,
     overlay: {
       warnings: true,
       errors: true
-    }
+    },
   },
   plugins: [
     new webpack.SourceMapDevToolPlugin({
@@ -21,7 +24,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {   // DEV config
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.s[ac]ss$/,
         use: [
           'style-loader', // Inject CSS into the DOM
           {
@@ -37,10 +40,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {   // DEV config
         ]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'file-loader',
         options: {
-          name: `${PATHS.assets}fonts/[name].[ext]`
+          name: `assets/fonts/[name].[ext]`
         }
       },
     ]

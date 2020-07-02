@@ -1,34 +1,45 @@
 const path = require('path');
 const fs = require('fs');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
-const SvgStore = require('webpack-svgstore-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+// const { VueLoaderPlugin } = require('vue-loader');
+// const SvgStore = require('webpack-svgstore-plugin');
 
 // Main const
-const PATHS = {
-  src: path.join(__dirname, '../src'),
-  dist: path.join(__dirname, '../dist'),
-  // dist: path.join(__dirname, '../../'),
-  assets: 'assets/'
+const PATH = {
+  src: path.join(__dirname, '../resources'),
+  dist: path.join(__dirname, '../public/build'),
 };
 
-const PAGES_DIR = `${PATHS.src}/pug/pages/`;
-const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'));
+const PAGES_DIR = fs.existsSync(`${PATH.src}/pug/pages/`) ? `${PATH.src}/pug/pages/` : null;
+const PAGES = PAGES_DIR ? fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug')) : null;
 
 module.exports =  {
-  externals: {
-    paths: PATHS
-  },
+  context: path.join(__dirname, '../resources'),
   entry: {
-    app: PATHS.src,
-    // module: `${PATHS.src}/your-module.js`,
+    'app': `./js/app.js`,
+  },
+  stats: {
+    children: false,
+    hash: false,
+    version: false,
+    errorDetails: false,
+    entrypoints: false,
+    performance: false,
+    chunks: false,
+    modules: false,
+    reasons: false,
+    source: false,
+    builtAt: false,
   },
   output: {
-    filename: `${PATHS.assets}js/[name].js`,
-    path: PATHS.dist,
-    publicPath: '/'
+    filename: `js/[name].js`,
+    path: PATH.dist,
+    publicPath: process.env.WEBPACK_DEV_SERVER ? '/' : './',
   },
   optimization: {
     splitChunks: {
@@ -40,7 +51,7 @@ module.exports =  {
           enforce: true
         }
       }
-    }
+    },
   },
   module: {
     rules: [{
@@ -53,21 +64,15 @@ module.exports =  {
       test: /\.js$/,
       exclude: '/node_modules/',
       loader: 'babel-loader'
-    }, {
-      test: /\.vue$/,
-      loader: 'vue-loader',
-      options: {
-        loader: {
-          scss: 'vue-style-loader!css-loader!sass-loader'
-        }
-      }
-    }, {
+    },
+    {
       test: /\.(png|jpg|jpeg|gif|svg)$/,
       loader: 'file-loader',
       options: {
-        name: '[name].[ext]'
+        name: '[name].[ext]?[hash]'
       }
-    },{
+    },
+    {
       test: /\.css$/,
       use: [
         MiniCssExtractPlugin.loader,
@@ -83,37 +88,53 @@ module.exports =  {
   },
   resolve: {
     alias: {
-      '~': PATHS.src,
-      'vue$': 'vue/dist/vue.js',
+      '~': PATH.src,
     }
   },
   plugins: [
-    new VueLoaderPlugin(),
+    // new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].css`,
+      filename: `css/[name].css`,
     }),
-    new CopyWebpackPlugin([
-      { from: `${PATHS.src}/${PATHS.assets}img`, to: `${PATHS.assets}img` },
-      { from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts` },
-      { from: `${PATHS.src}/static`, to: '' },
-    ]),
-    new SvgStore({
-      // svgo options\
-      svgoOptions: {
-        plugins: [
-          { removeTitle: true },
-          // { removeViewBox: true },
-          // { removeAttrs: {
-          //     attrs: '*:(stroke|fill):((?!^none$).)*'
-          //   }
-          // }
-        ]
+    new CopyPlugin({
+      patterns: [
+        {from: `./assets/img`, to: 'img'},
+        {from: `./assets/fonts`, to: 'fonts'},
+        {from: `./static`, to: ''},
+      ],
+    }),
+    // new SvgStore({
+    //   // svgo options\
+    //   svgoOptions: {
+    //     plugins: [
+    //       { removeTitle: true },
+    //       // { removeViewBox: true },
+    //       // { removeAttrs: {
+    //       //     attrs: '*:(stroke|fill):((?!^none$).)*'
+    //       //   }
+    //       // }
+    //     ]
+    //   },
+    //   prefix: ''
+    // }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [PATH.dist],
+    }),
+    new ManifestPlugin({
+      fileName: '../mix-manifest.json',
+      map: (FileDescriptor) => {
+        FileDescriptor.name = `/build/${FileDescriptor.name}`;
+        return FileDescriptor;
       },
-      prefix: ''
     }),
-    ...PAGES.map(page => new HtmlWebpackPlugin({
-      template: `${PAGES_DIR}/${page}`,
-      filename: `./${page.replace(/\.pug/,'.html')}`
-    }))
-  ],
+  ]
+    .concat(fs.existsSync('./.env') ? [new Dotenv()] : [])
+    .concat(PAGES_DIR ?
+      [...PAGES.map(page => new HtmlWebpackPlugin({
+        template: `${PAGES_DIR}/${page}`,
+        filename: `./${page.replace(/\.pug/,'.html')}`,
+        hash: true,
+        cache: false,
+      }))]
+  : []),
 };

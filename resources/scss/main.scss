@@ -121,9 +121,9 @@ input[type="radio"].visually-hidden {
   overflow: hidden;
 }
 
-/*--------------------------------
-        Global classes
---------------------------------*/
+//--------------------------------
+// Global classes
+//--------------------------------
 
 .container {
   margin-left: 16.5rem;
@@ -135,19 +135,48 @@ input[type="radio"].visually-hidden {
 }
 
 .text-content {
-  ul, li {
+  ul, ul li {
     list-style-type: disc;
+  }
+
+  ul, ol {
+    padding-left: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  ol, ol li {
+    list-style-type: decimal;
   }
 
   li:nth-child(n+2) {
     margin-top: 1rem;
   }
 
+  table {
+    margin-bottom: 3rem;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  th, td {
+    padding: .5rem 1rem;
+  }
+
+  tr:first-child td {
+    background-color: $accentColor;
+    color: #fff;
+    font-weight: 600;
+  }
+
 
   @media (max-width: $breakpoint-medium) {
 
-    .uk-grid ul {
-      margin-left: 20px;
+    ul, ol {
+      padding-left: 2rem;
     }
 
     &.bg-color {
@@ -156,6 +185,7 @@ input[type="radio"].visually-hidden {
     }
   }
 }
+
 
 .video {
   position: relative;
@@ -172,4 +202,21 @@ input[type="radio"].visually-hidden {
     height: 100%;
   }
 }
+
+h2 {
+  background-color: red;
+}
+
+//--------------------------------
+// Components
+//--------------------------------
+
+// here...
+
+
+//--------------------------------
+// Modules
+//--------------------------------
+@import "modules/header";
+@import "modules/footer";
 

@@ -4,10 +4,6 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const buildWebpackConfig = merge(baseWebpackConfig, { // BUILD config
-  output: {
-    publicPath: './'
-  },
-  watch: true,
   mode: 'production',
   plugins: [
     new ImageminPlugin({
@@ -20,10 +16,13 @@ const buildWebpackConfig = merge(baseWebpackConfig, { // BUILD config
       }
     })
   ],
+  output: {
+    publicPath: './',
+  },
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.s[ac]ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,

@@ -1,4 +1,5 @@
-include ../utils/mixins
+include components/mixins
+- var data = Object(require("../data.json"))
 
 block variables
   - var title = 'Title';
@@ -11,14 +12,14 @@ html(lang='en')
     meta(charset='utf-8')
     title #{title}
     meta(name="description", content=description)
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     block head
 
   body(class=pageClass)
-    //#app
-    include ../includes/modules/header
+    include modules/header
 
     block content
 
-    include ../includes/modules/footer
+    include modules/footer
 
     block script
